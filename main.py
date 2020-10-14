@@ -1,31 +1,29 @@
-import requests
-import concurrent.futures
-
-
-def make_request(route, token=''):
-    BASE_URL = "http://127.0.0.1:5000"
-    link = BASE_URL + route
-    print(link)
-    return requests.get(link, headers={"X-Access-Token": token}).json()
+from traverse import Traverse
+from save import SaveData
+from format import Parser
 
 
 def main():
-    accessToken = make_request('/register')["access_token"]
-    links = make_request('/home', accessToken)["link"]
+    results = Traverse('http://127.0.0.1:5000').register()
+    save = SaveData()
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        queue = [executor.submit(make_request, links[key], accessToken) for key in links]
-        results = []
+    for element in results:
+        data = element['data']
+        if 'file_type' in element:
+            fileType = element['file_type']
 
-        while queue:
-            response = queue.pop(0).result()
-            results.append(response)
+            if fileType == 'application/xml':
+                save.adds(Parser.parseXML(data))
+            elif fileType == 'text/csv':
+                save.adds(Parser.parseCSV(data))
+            elif fileType == 'application/x-yaml':
+                save.adds(Parser.parseYAML(data))
 
-            if 'link' in response and 'msg' not in response:
-                links = response['link']
-                for key in links:
-                    queue.append(executor.submit(make_request, links[key]))
-                    print(key)
+        else:
+            save.adds(Parser.parseJSON(data))
+
+    print(save.selectColumns(['first_name', 'last_name', 'email']))
 
 
-main()
+if __name__ == "__main__":
+    main()
