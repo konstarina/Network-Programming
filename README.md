@@ -1,4 +1,5 @@
 # Network-Programming
+## Laboratory Work 1
 
 #### Launch
 $ python main.py
@@ -18,3 +19,6 @@ client.py, server.py, format.py, save.py, traverse.py
   {'first_name': ['Foster', 'Vinni', 'Randolf', 'Loella', 'Brandise', 'Fielding]}
 ```
 - [ ] a concurrent TCP server (still in progress)
+
+
+![Screenshot](screen.png)
