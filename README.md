@@ -13,8 +13,8 @@ client.py, server.py, format.py, save.py, traverse.py
 #### Task done
 - [x] access the root route of the server  
 - [x] get links to next links from link key
-- [x] parse the data to general representation like
+- [x] parse and save the data to general representation like
 ```
-{'first_name': ['Foster', 'Vinni', 'Randolf', 'Loella', 'Brandise', 'Fielding
+  {'first_name': ['Foster', 'Vinni', 'Randolf', 'Loella', 'Brandise', 'Fielding]}
 ```
 - [ ] a concurrent TCP server (still in progress)
