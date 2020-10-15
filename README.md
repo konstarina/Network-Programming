@@ -17,4 +17,4 @@ client.py, server.py, format.py, save.py, traverse.py
 ```
 {'first_name': ['Foster', 'Vinni', 'Randolf', 'Loella', 'Brandise', 'Fielding
 ```
-- [] a concurrent TCP server (still in progress)
+- [ ] a concurrent TCP server (still in progress)
