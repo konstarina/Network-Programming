@@ -7,16 +7,17 @@ def main():
     results = Traverse('http://127.0.0.1:5000').register()
     save = SaveData()
 
+
     for element in results:
         data = element['data']
-        if 'file_type' in element:
-            fileType = element['file_type']
+        if 'mime_type' in element:
+            fileType = element['mime_type']
 
-            if fileType == 'application/xml':
+            if fileType == '/xml':
                 save.adds(Parser.parseXML(data))
-            elif fileType == 'text/csv':
+            elif fileType == '/csv':
                 save.adds(Parser.parseCSV(data))
-            elif fileType == 'application/x-yaml':
+            elif fileType == '/x-yaml':
                 save.adds(Parser.parseYAML(data))
 
         else:
